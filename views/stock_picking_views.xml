@@ -1,0 +1,27 @@
+<odoo>
+  <data>
+    <record id="stock_picking_form_category_total_quantity" model="ir.ui.view">
+      <field name="name">stock.picking.form.inherit.category.total.quantity</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='operations']/field[@name='move_ids_without_package']" position="after">
+          <group>
+            <field name="category_ids" groups="picking_category_total_quantity.group_picking_product_category">
+              <tree>
+                <field name="category"/>
+                <field name="demand"/>
+                <field name="done"/>
+              </tree>
+            </field>
+          </group>
+        </xpath>
+        <xpath expr="//field[@name='category_ids']" position="after">
+          <group>
+            <field name="print_in_pdf" widget="boolean_toggle" groups="picking_category_total_quantity.group_picking_product_category"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

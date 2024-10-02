@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <!-- Inherit the existing picking report template -->
+        <template id="report_picking_inherit" inherit_id="stock.report_picking">
+            <xpath expr="//table[@class='table table-sm'][1]" position="after">
+                <!-- New table for product.category.line, only shown if print_in_pdf is True -->
+                <t t-if="o.print_in_pdf">  <!-- Check if print_in_pdf is True -->
+                    <table class="table table-sm mt32">
+                        <thead>
+                            <tr>
+                                <th><strong>Category Name</strong></th>
+                                <th><strong>Demand</strong></th>
+                                <th><strong>Done</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.category_ids" t-as="line">
+                                <td>
+                                    <span t-field="line.category"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.demand"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.done"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>
